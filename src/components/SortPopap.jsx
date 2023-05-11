@@ -7,7 +7,7 @@ function SortPopap({items}) {
 
     const sortRef = useRef()
 
-    const activeName = items[activeItem]
+    const activeName = items[activeItem].name
 
     const togleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup)
@@ -60,12 +60,12 @@ const Popup = ({items, setVisiblePopup, activeItem, setActiveItem}) => {
     return (
         <div className='sort__popup'>
         <ul>
-            {items && items.map((name, index) => (
+            {items && items.map((obj, index) => (
             <li
                 className={activeItem === index ? "active" : ""}
                 onClick={() => onSelectItem(index)} 
-                key={name}
-                >{name}
+                key={obj.type}
+                >{obj.name}
             </li>))}
         </ul>
         </div>

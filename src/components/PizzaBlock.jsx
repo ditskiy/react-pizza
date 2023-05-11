@@ -80,7 +80,7 @@ function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
   </div>
   )
 }
-
+ 
 PizzaBlock.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired
