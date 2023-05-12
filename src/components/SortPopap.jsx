@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, memo} from 'react'
 
-function SortPopap({items}) {
+const SortPopap = memo(function SortPopap({items}) {
 
     const [visiblePopup, setVisiblePopup] = useState(false);
     const [activeItem, setActiveItem] = useState(0)
@@ -48,7 +48,7 @@ function SortPopap({items}) {
             setActiveItem={setActiveItem}/>}
     </div>
   )
-}
+})
 
 const Popup = ({items, setVisiblePopup, activeItem, setActiveItem}) => {
 
@@ -56,7 +56,6 @@ const Popup = ({items, setVisiblePopup, activeItem, setActiveItem}) => {
         setActiveItem(index)
         setVisiblePopup(false)
       }
-
     return (
         <div className='sort__popup'>
         <ul>
