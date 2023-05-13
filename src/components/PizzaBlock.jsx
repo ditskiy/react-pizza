@@ -19,6 +19,8 @@ function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
         setActiveType(index)
     }
 
+ 
+
   return (
     <div className='pizza-block'>
         <img
@@ -26,6 +28,7 @@ function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
             src={imageUrl}
             alt={name}
         />
+
         <h4 className='pizza-block__title'>{name}</h4>
         <div className='pizza-block__selector'>
             <ul>
@@ -80,14 +83,17 @@ function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
   </div>
   )
 }
+
  
 PizzaBlock.propTypes = {
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
+    price: PropTypes.number.isRequired,
+    isLoading: PropTypes.bool.isRequired
 }
 
 PizzaBlock.defaultProps = {
-    types: []
+    types: [],
+    isLoading: false
 }
 
 export default PizzaBlock
