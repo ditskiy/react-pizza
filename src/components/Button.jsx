@@ -1,9 +1,9 @@
 
 
-function Button() {
+function Button({totalPrice, itemCount}) {
     return (
             <button className="button button--cart">
-              <span>520 ₽</span>
+              <span>{totalPrice} ₴</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
@@ -34,7 +34,7 @@ function Button() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>3</span>
+              <span>{itemCount}</span>
             </button>
     )
 }

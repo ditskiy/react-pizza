@@ -37,10 +37,14 @@ function Home() {
 
   const onSelectCategori = useCallback((index) => {
     dispatch(setCategory(index))
-  }, [])
+  }, [dispatch])
 
   const onSelectSortType = useCallback((type) => {
     dispatch(setSortBy(type))
+  }, [dispatch])
+
+  const onClickAddPizza = useCallback((obj) => {
+    console.log(obj)
   }, [])
 
   return (
@@ -59,9 +63,10 @@ function Home() {
     <h2 className='content__title'>Все пиццы</h2>
     <div className='content__items'>
         {isLoading ? items && items.map((obj) => (
-            <PizzaBlock  
-                key={obj.id}
-                {...obj}/>
+            <PizzaBlock 
+              onClickAddPizza={onClickAddPizza}
+              key={obj.id}
+              {...obj}/>
         )) : Array(12).fill(0).map((_, index) => <LoadingPizza key={index}/>)}
         
     </div>

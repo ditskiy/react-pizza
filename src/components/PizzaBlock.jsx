@@ -3,11 +3,10 @@ import { useState } from 'react'
 import classNames from 'classnames'
 import PropTypes from "prop-types"
 
-
-function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
+function PizzaBlock({id, imageUrl, name, types, sizes, price, onClickAddPizza}) {
     const type = ["тонкое", "традиционное"]
     const size = [26, 30, 40]
-    
+
     const [activeType, setActiveType] = useState(types[0])
     const [activeSizes, setActiveSizes] = useState(0)
 
@@ -47,7 +46,7 @@ function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
                 }
             </ul>
             <ul>{
-                    size.map((item, index)=> (
+                    size.map((item, index) => (
                         <li 
                             key={item}
                             onClick={() => onSelectSizes(index)} 
@@ -63,7 +62,9 @@ function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
         </div>
         <div className='pizza-block__bottom'>
             <div className='pizza-block__price'>от {price} ₴</div>
-            <div className='button button--outline button--add'>
+        <button 
+            onClick={() => onClickAddPizza({id, name, imageUrl, activeType, activeSizes, price})}
+            className='button button--outline button--add'>
             <svg
                 width='12'
                 height='12'
@@ -78,7 +79,7 @@ function PizzaBlock({imageUrl, name, types, sizes, price, category, rating}) {
             </svg>
             <span>Добавить</span>
             <i>2</i>
-        </div>
+        </button>
     </div>
   </div>
   )
