@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState, memo} from 'react'
 
-const SortPopap = memo(function SortPopap({items}) {
+const SortPopap = memo(function SortPopap({items, activeSortType, onClickSortType}) {
 
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [activeItem, setActiveItem] = useState(0)
+    // const [activeItem, setActiveItem] = useState(0)
 
     const sortRef = useRef()
 
-    const activeName = items[activeItem].name
+    const activeName = items.find(obj => obj.type === activeSortType).name
 
     const togleVisiblePopup = () => {
         setVisiblePopup(!visiblePopup)
     }
+
     const handleOutsideClick = (e) => {
         if (sortRef.current && e.target.contains(sortRef.current)) {
             setVisiblePopup(false)
@@ -43,26 +44,26 @@ const SortPopap = memo(function SortPopap({items}) {
         </div>
         {visiblePopup && <Popup 
             items={items} 
-            setVisiblePopup={setVisiblePopup} 
-            activeItem={activeItem} 
-            setActiveItem={setActiveItem}/>}
+            togleVisiblePopup={togleVisiblePopup}
+            activeSortType={activeSortType} 
+            onClickSortType={onClickSortType}/>}
     </div>
   )
 })
 
-const Popup = ({items, setVisiblePopup, activeItem, setActiveItem}) => {
+const Popup = ({items, activeSortType, onClickSortType, togleVisiblePopup}) => {
 
-    const onSelectItem = (index) => {
-        setActiveItem(index)
-        setVisiblePopup(false)
+    const onSelectItem = (type) => {
+        onClickSortType(type)
+        togleVisiblePopup()
       }
     return (
         <div className='sort__popup'>
         <ul>
-            {items && items.map((obj, index) => (
+            {items && items.map((obj) => (
             <li
-                className={activeItem === index ? "active" : ""}
-                onClick={() => onSelectItem(index)} 
+                className={activeSortType === obj.type ? "active" : ""}
+                onClick={() => onSelectItem(obj.type)} 
                 key={obj.type}
                 >{obj.name}
             </li>))}
