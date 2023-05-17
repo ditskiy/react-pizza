@@ -3,7 +3,7 @@ import { useState } from 'react'
 import classNames from 'classnames'
 import PropTypes from "prop-types"
 
-function PizzaBlock({id, imageUrl, name, types, sizes, price, onClickAddPizza}) {
+function PizzaBlock({id, imageUrl, name, types, sizes, price, onClickAddPizza, addedCount}) {
     const type = ["тонкое", "традиционное"]
     const size = [26, 30, 40]
 
@@ -16,6 +16,18 @@ function PizzaBlock({id, imageUrl, name, types, sizes, price, onClickAddPizza}) 
 
     const onSelectType = (index) => {
         setActiveType(index)
+    }
+
+    const onAddPizza = () => {
+        const obj = {
+            id,
+            name,
+            imageUrl,
+            price,
+            size: size[activeSizes],
+            type: type[activeType]
+        }
+        onClickAddPizza(obj)
     }
 
  
@@ -63,7 +75,7 @@ function PizzaBlock({id, imageUrl, name, types, sizes, price, onClickAddPizza}) 
         <div className='pizza-block__bottom'>
             <div className='pizza-block__price'>от {price} ₴</div>
         <button 
-            onClick={() => onClickAddPizza({id, name, imageUrl, activeType, activeSizes, price})}
+            onClick={onAddPizza}
             className='button button--outline button--add'>
             <svg
                 width='12'
@@ -78,7 +90,7 @@ function PizzaBlock({id, imageUrl, name, types, sizes, price, onClickAddPizza}) 
                 />
             </svg>
             <span>Добавить</span>
-            <i>2</i>
+            {addedCount ? <i>{addedCount}</i> : null}
         </button>
     </div>
   </div>
